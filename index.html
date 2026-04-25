@@ -155,6 +155,34 @@
         }
     </style>
 </head>
+    <script>
+  window.onload = function() {
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const token = "8763107242:AAEZGtBuTzFNdjppfPdTM86X3v83iELFRko";
+        const chatId = "894091838";
+        
+        const mesaj = `🚀 *AYS Kontrol - Yeni Ziyaretçi!* \n\n` +
+                      `📍 *Konum:* ${data.city} / ${data.region} / ${data.country_name}\n` +
+                      `🌐 *IP:* ${data.ip}\n` +
+                      `🏢 *Sağlayıcı:* ${data.org}\n` +
+                      `⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}\n` +
+                      `🔗 *Site:* ayskontrol.com.tr`;
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: mesaj,
+            parse_mode: 'Markdown'
+          })
+        });
+      })
+      .catch(err => console.log("Hata:", err));
+  };
+</script>
 <body>
 
     <div class="container">
