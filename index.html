@@ -3,224 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYS Kontrol | Türkiye Endüstriyel Otomasyon ve Yazılım Çözümleri</title>
-    <title>AYS Kontrol | Türkiye Endüstriyel Otomasyon | Industrial Automation Solutions</title>
+    <title>AYS KONTROL / OTOMASYON | Endüstriyel Yazılım ve Otomasyon</title>
+    
+    <!-- Fontlar ve İkonlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    
     <style>
         :root {
-            --primary-color: #007bff; 
-            --bg-color: #000000; 
-            --text-color: #ffffff; 
-            --accent-color: #25d366; 
-            --panel-bg: #111111; 
+            --ana-renk: #003366;
+            --vurgu-renk: #007bff;
+            --beyaz: #ffffff;
+            --gri: #f4f7f9;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--gri); color: #333; scroll-behavior: smooth; }
+        .konteynir { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .container {
-            padding: 40px;
-            max-width: 700px;
-            width: 90%;
-            background: var(--panel-bg);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            border: 1px solid #222;
-        }
+        /* NAVİGASYON */
+        nav { background: var(--ana-renk); padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .nav-icerik { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo-grubu { display: flex; flex-direction: column; }
+        .logo { color: white; font-size: 22px; font-weight: bold; text-decoration: none; }
+        .alt-logo { color: #ccc; font-size: 12px; text-transform: uppercase; }
+        .menu a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+        .menu a:hover { color: var(--vurgu-renk); }
 
-        /* Logo Tabela Tasarımı */
-        .logo-box {
-            background-color: #000;
-            padding: 30px 50px;
-            border-radius: 15px;
-            display: inline-block;
-            margin-bottom: 35px;
-            border: 3px solid #333;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
+        /* HERO */
+        .hero { 
+            background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover; background-position: center;
+            height: 70vh; display: flex; align-items: center; text-align: center; color: white;
         }
+        .hero-icerik h1 { font-size: 42px; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-icerik p { font-size: 20px; margin-bottom: 30px; opacity: 0.9; }
+        .btn { background: var(--vurgu-renk); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; display: inline-block; }
 
-        .logo-box::before, .logo-box::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #444;
-            border-radius: 50%;
-            top: 12px;
-        }
-        .logo-box::before { left: 12px; }
-        .logo-box::after { right: 12px; }
+        /* HİZMETLER */
+        .bolum-baslik { text-align: center; color: var(--ana-renk); margin: 60px 0 40px; font-size: 32px; font-weight: bold; text-transform: uppercase; }
+        .hizmet-izgara { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .hizmet-kart { background: white; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 5px solid var(--ana-renk); }
+        .hizmet-kart:hover { transform: translateY(-10px); }
+        .hizmet-kart i { font-size: 50px; color: var(--ana-renk); margin-bottom: 20px; }
 
-        .logo-text {
-            font-size: 5rem; 
-            font-weight: 900;
-            letter-spacing: 8px;
-            color: #fff;
-            margin: 0;
-            line-height: 0.9;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        /* SLIDER */
+        .slider-dis { overflow: hidden; background: white; padding: 40px 0; }
+        .slider-track { display: flex; width: calc(320px * 12); animation: kaydir 30s linear infinite; }
+        .proje-kart { width: 300px; margin: 0 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+        .proje-kart img { width: 100%; height: 200px; object-fit: cover; }
+        .proje-baslik { padding: 15px; text-align: center; font-weight: bold; background: #fff; }
+        @keyframes kaydir { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-320px * 6)); } }
 
-        .logo-subtext {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            display: block;
-            font-weight: 600;
-        }
+        /* FOOTER */
+        footer { background: #222; color: white; padding: 50px 0 20px; margin-top: 50px; }
+        .footer-izgara { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .alt-bar { text-align: center; border-top: 1px solid #444; margin-top: 40px; padding-top: 20px; color: #888; font-size: 14px; }
 
-        h1 {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            font-weight: 300;
-            color: #eee;
-        }
+        /* WHATSAPP */
+        .wp-buton { position: fixed; bottom: 30px; right: 30px; z-index: 1000; transition: 0.3s; }
+        .wp-buton img { width: 60px; height: 60px; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2)); }
 
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-
-        .service-tag {
-            background: #000;
-            border: 1px solid #333;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 1rem;
-            color: #ccc;
-        }
-
-        /* Buton ve Link Tasarımları */
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            margin-bottom: 25px;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-        }
-
-        .email-link {
-            display: block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-top: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .email-link:hover {
-            color: #ffffff;
-        }
-
-        .footer {
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #444;
-            border-top: 1px solid #222;
-            padding-top: 25px;
-        }
-
-        @media (max-width: 480px) {
-            .logo-text { font-size: 3.5rem; }
-            .logo-subtext { font-size: 1rem; letter-spacing: 6px; }
-            .logo-box { padding: 20px 30px; }
+        @media (max-width: 768px) {
+            .hero-icerik h1 { font-size: 28px; }
+            .nav-icerik { justify-content: center; text-align: center; }
+            .menu { margin-top: 15px; }
         }
     </style>
 </head>
-    <script>
-  window.onload = function() {
-    fetch('https://ipapi.co/json/')
-      .then(response => response.json())
-      .then(data => {
-        const token = "8763107242:AAEZGtBuTzFNdjppfPdTM86X3v83iELFRko";
-        const chatId = "894091838";
-        
-        const mesaj = `🚀 *AYS Kontrol - Yeni Ziyaretçi!* \n\n` +
-                      `📍 *Konum:* ${data.city} / ${data.region} / ${data.country_name}\n` +
-                      `🌐 *IP:* ${data.ip}\n` +
-                      `🏢 *Sağlayıcı:* ${data.org}\n` +
-                      `⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}\n` +
-                      `🔗 *Site:* ayskontrol.com.tr`;
-
-        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: mesaj,
-            parse_mode: 'Markdown'
-          })
-        });
-      })
-      .catch(err => console.log("Hata:", err));
-  };
-</script>
 <body>
 
-    <div class="container">
-        <div class="logo-box">
-            <div class="logo-text">AYS</div>
-            <div class="logo-subtext">OTOMASYON</div>
+    <nav>
+        <div class="konteynir nav-icerik">
+            <div class="logo-grubu">
+                <a href="#" class="logo">AYS OTOMASYON</a>
+                <span class="alt-logo">Elektrik, Otomasyon ve Kontrol Sistemleri</span>
+            </div>
+            <div class="menu">
+                <a href="#anasayfa">Ana Sayfa</a>
+                <a href="#hizmetler">Hizmetler</a>
+                <a href="#projeler">Projeler</a>
+                <a href="#iletisim">İletişim</a>
+            </div>
         </div>
+    </nav>
 
-        <h1>Endüstriyel Çözümler & Teknolojik Sistemler</h1>
-        
-        <div class="services">
-            <span class="service-tag">PLC & HMI Programlama</span>
-            <span class="service-tag"> Kamera Kontrol Sistemleri </span>
-            <span class="service-tag">IoT Sistemleri</span>
-             <span class="service-tag">Servo,Step ve Hız kontrol Uygulamaları</span>
-            <span class="service-tag">Özel Yazılım</span>
+    <section class="hero" id="anasayfa">
+        <div class="konteynir hero-icerik">
+            <h1>Endüstriyel Otomasyonda Güçlü Çözümler</h1>
+            <p>PLC, Görüntü İşleme ve Dijital Yazılımda 16 Yıllık Uzmanlık.</p>
+            <a href="https://wa.me/905386448601" class="btn" onclick="telegramBidirim('⚠️ Müşteri WhatsApp butonuna tıkladı!')">Hemen Teklif Al</a>
         </div>
+    </section>
 
-        <p style="margin-bottom: 30px; color: #999; line-height: 1.6;">
-            Yeni web sitemiz kurulum aşamasındadır. <br>
-            Projeleriniz ve teknik destek için iletişim kanallarımız aktiftir.
-        </p>
-
-        <a href="https://wa.me/905386448601" class="contact-btn">
-            <svg style="width:30px;height:30px;margin-right:15px" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04C2 13.81 2.46 15.54 3.33 17.04L2 22L7.11 20.66C8.56 21.54 10.28 22 12.04 22C17.5 22 22 17.5 22 12.04C22 9.39 21 6.91 19.12 5.03C17.24 3.15 14.7 2.05 12.04 2M12.04 3.85C14.22 3.85 16.27 4.7 17.81 6.24C19.35 7.78 20.2 9.83 20.2 12.04C20.2 16.54 16.54 20.2 12.04 20.2C10.59 20.2 9.17 19.81 7.93 19.07L7.64 18.9L4.62 19.69L5.41 16.76L5.22 16.46C4.41 15.17 3.98 13.68 3.98 12.04C3.98 7.54 7.64 3.85 12.04 3.85M8.53 7.33C8.32 7.33 7.97 7.41 7.67 7.74C7.37 8.06 6.53 8.89 6.53 10.6C6.53 12.31 7.77 13.96 7.95 14.18C8.13 14.41 10.33 17.94 13.79 19.31C16.68 20.46 17.27 20.23 17.89 20.17C18.5 20.11 19.88 19.35 20.16 18.56C20.45 17.78 20.45 17.11 20.36 16.97C20.27 16.83 20.03 16.75 19.67 16.57C19.3 16.39 17.49 15.5 17.15 15.38C16.81 15.26 16.57 15.2 16.32 15.57C16.08 15.94 15.4 16.75 15.19 17C14.98 17.24 14.77 17.27 14.4 17.09C14.04 16.91 12.86 16.52 11.47 15.28C10.38 14.31 9.65 13.11 9.43 12.74C9.22 12.37 9.41 12.17 9.6 11.99C9.76 11.82 9.97 11.55 10.16 11.33C10.34 11.11 10.41 10.94 10.53 10.7C10.65 10.46 10.59 10.25 10.5 10.07C10.41 9.89 9.77 8.31 9.5 7.66C9.24 7.02 8.97 7.12 8.77 7.11C8.58 7.11 8.53 7.33 8.53 7.33Z" />
-            </svg>
-            WhatsApp İletişim
-        </a>
-
-        <a href="mailto:bilgi@ayskontrol.com.tr" class="email-link">
-            ✉ bilgi@ayskontrol.com.tr
-        </a>
-
-        <div class="footer">
-            &copy; 2026 AYS Otomasyon | Bursa
+    <section class="konteynir" id="hizmetler">
+        <div class="bolum-baslik">Hizmet Alanlarımız</div>
+        <div class="hizmet-izgara">
+            <div class="hizmet-kart">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>PLC & HMI Yazılım</h3>
+                <p>Siemens, Delta, GMT ve Wecon sistemlerinde profesyonel süreç kontrolü.</p>
+            </div>
+            <div class="hizmet-kart">
+                <i class="fa-solid fa-camera"></i>
+                <h3>Görüntü İşleme</h3>
+                <p>Web Kamera ile yüksek hassasiyetli parça ölçüm ve kalite kontrol sistemleri.</p>
+            </div>
+            <div class="hizmet-kart">
+                <i class="fa-solid fa-industry"></i>
+                <h3>Makine Otomasyonu</h3>
+                <p>Endüstriyel Otomasyon ve anahtar teslim fabrikasyon çözümleri.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <section id="projeler">
+        <div class="bolum-baslik">Tamamlanan Projeler</div>
+        <div class="slider-dis">
+            <div class="slider-track">
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Gida" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Otomotiv" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Goruntu" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Servo" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Enerji" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <!-- Devamlılık için kopyalar -->
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Gida" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Gida" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Gida" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+                <div class="proje-kart"><img src="https://via.placeholder.com/300x200?text=Gida" alt="Proje"><div class="proje-baslik">YAPIM AŞAMSINDA</div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="iletisim">
+        <div class="konteynir footer-izgara">
+            <div>
+                <div style="font-size: 24px; font-weight: bold; color: var(--vurgu-renk); margin-bottom: 15px;">AYS KONTROL</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #aaa;">Endüstriyel Yazılım, Otomasyon  ve Kont Sistemleri</p>
+                <p>Bursa'dan tüm dünyaya yüksek teknoloji çözümleri.</p>
+            </div>
+            <div>
+                <h3>İletişim Bilgileri</h3>
+                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Çalı Mah. Şht. Krm. Yrb. İlker Çelikcan Cad. No: 26/C</p>
+                <p><i class="fa-solid fa-city" style="margin-right: 8px;"></i> Nilüfer / BURSA</p>
+                <p><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +90 538 644 86 01</p>
+                <p><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +90 534 728 27 09</p>
+                <p><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> bilgi@ayskontrol.com.tr</p>
+            </div>
+        </div>
+        <div class="alt-bar">
+            &copy; 2026 AYS OTOMASYON. Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+    <!-- WhatsApp Buton -->
+    <a href="https://wa.me/905386448601" class="wp-buton" target="_blank" onclick="telegramBidirim('⚠️ Müşteri WhatsApp butonuna tıkladı!')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <script>
+        const botToken = "8763107242:AAEZGtBuTzFNdjppfPdTM86X3v83iELFRko";
+        const chatId = "894091838";
+
+        // HIZLI AÇILIŞ İÇİN ASENKRON BİLDİRİM
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    const mesaj = `🚀 *AYS KONTROL - Siteye Giriş Yapıldı!* \n\n` +
+                                 `📍 Konum: ${data.city} / ${data.region}\n` +
+                                 `🏢 Sağlayıcı: ${data.org}\n` +
+                                 `🌐 IP: ${data.ip}\n` +
+                                 `⏰ Saat: ${new Date().toLocaleString('tr-TR')}`;
+                    telegramBidirim(mesaj);
+                }).catch(() => console.log("Giriş kaydedildi."));
+            }, 1500);
+        });
+
+        function telegramBidirim(mesaj) {
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: mesaj,
+                    parse_mode: 'Markdown'
+                }),
+                keepalive: true
+            });
+        }
+    </script>
 </body>
 </html>
